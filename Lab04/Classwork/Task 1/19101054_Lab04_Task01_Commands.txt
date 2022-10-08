@@ -1,0 +1,11 @@
+ipconfig /all
+ping 10.10.1.18
+tracert 10.10.1.18
+show ip interface brief
+show ip route
+config terminal
+int serial0/0/0
+ip address 10.10.1.5 255.255.255.252
+ipv6config /all
+ping 2001:DB8:1:4::2
+show ipv6 interface brief
