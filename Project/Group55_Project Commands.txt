@@ -1,0 +1,187 @@
+The Wall of Knowledge:
+
+Router(config)#interface FastEthernet7/0
+Router(config-if)#no shutdown
+Router(config-if)#
+Router(config)#interface FastEthernet7/0
+Router(config-if)#ip address 12.12.184.1 255.255.254.0
+Router(config-if)#
+Router(config)#interface Serial3/0
+Router(config-if)#ip address 12.12.186.75 255.255.255.248
+Router(config-if)#no shutdown
+Router(config-if)#
+Router(config-if)#ip helper-address 12.12.160.7
+Router(config)#ip route 12.12.0.0 255.255.128.0 s3/0
+Router(config)#ip route 12.12.160.0 255.255.240.0 12.12.186.9
+
+
+The Royal Palace of Wakanda:
+
+Router(config)#interface FastEthernet7/0
+Router(config-if)#no shutdown
+Router(config-if)#
+Router(config-if)#exit
+Router(config)#interface FastEthernet7/0
+Router(config-if)#ip address 12.12.0.1 255.255.128.0
+Router(config)#interface Serial3/0
+Router(config-if)#ip address 12.12.186.73 255.255.255.248
+Router(config-if)#no shutdown
+Router(config)#ip route 12.12.184.0 255.255.254.0 s3/0
+Router(config)#ip route 12.12.160.0 255.255.240.0 12.12.186.33
+Router(config)#ip route 12.12.180.0 255.255.252.0 se0/0 1
+Router(config)#
+Router(config)#ip route 12.12.180.0 255.255.252.0 se1/0 10
+
+
+Jabari Village:
+
+Router>enable
+Router#
+Router#configure terminal
+Enter configuration commands, one per line.  End with CNTL/Z.
+Router(config)#interface FastEthernet7/0
+Router(config-if)#ip address 12.12.160.1 255.255.240.0
+Router(config-if)#no shutdown
+Router(config)#interface Serial1/0
+Router(config-if)#ip address 12.12.186.33 255.255.255.248
+Router(config)#ip route 12.12.184.0 255.255.254.0 S4/0
+Router(config)#ip route 12.12.180.0 255.255.252.0 Se2/0
+Router(config)#ip route 0.0.0.0 0.0.0.0 se6/0
+
+Techno:
+
+Router>enable
+Router#
+Router#configure terminal
+Enter configuration commands, one per line.  End with CNTL/Z.
+Router(config)#interface FastEthernet7/0
+Router(config-if)#ip address 12.12.176.1 255.255.252.0
+Router(config-if)#no shutdown
+Router(config-if)#
+Router(config-if)#ip helper-address 12.12.160.7
+
+
+N'Jadaka:
+
+Router>enable
+Router#
+Router#configure terminal
+Enter configuration commands, one per line.  End with CNTL/Z.
+Router(config)#interface FastEthernet7/0
+Router(config-if)#ip helper-address 12.12.160.7
+Router(config)#ip route 12.12.160.0 255.255.240.0 Se2/0
+Router(config-if)#ip address 12.12.180.1 255.255.252.0
+Router(config)#router rip
+Router(config-router)#version 2
+Router(config-router)#no auto-summary
+Router(config-router)#network 12.12.186.104
+Router(config-router)#network 12.12.180.0
+Router(config-router)#passive-interface f7/0
+Router(config-router)#exit
+Router(config)#exit
+Router
+
+
+Necropolis:
+
+Router>enable
+Router#
+Router#configure terminal
+Enter configuration commands, one per line.  End with CNTL/Z.
+Router(config)#interface FastEthernet7/0
+Router(config-if)#ip address 12.12.128.1 255.255.224.0
+Router(config-if)#no shut
+
+Router(config)#router rip
+Router(config-router)#
+Router(config-router)#version 2
+Router(config-router)#
+Router(config-router)#no auto-summary
+Router(config-router)#
+Router(config-router)#network 12.12.186.112
+Router(config-router)#network 12.12.186.56
+Router(config-router)#network 12.12.186.16
+Router(config-router)#network 12.12.186.72
+Router(config-router)#network 12.12.186.104
+Router(config-router)#network 12.12.128.0
+Router(config-router)#passive-interface f7/0
+Router(config-router)#default-information originate
+Router(config-router)#end
+
+
+ISP:
+
+Router>enable
+Router#
+Router#configure terminal
+Enter configuration commands, one per line.  End with CNTL/Z.
+Router(config)#interface Serial0/0
+Router(config-if)#no shutdown
+Router(config-if)#
+%LINK-5-CHANGED: Interface Serial0/0, changed state to up
+Router(config)#interface Serial0/0
+Router(config-if)#ip address 12.12.186.123 255.255.255.248
+Router(config-if)#ip nat inside
+Router(config)#interface FastEthernet7/0
+Router(config-if)#ip address 14.14.0.1 255.255.255.0
+Router(config-if)#ip nat outside
+Router(config-if)#no shut
+Router(config-if)#exit
+Router(config)#ip route 0.0.0.0 0.0.0.0 se0/0
+Router(config)#
+
+Router(config)#int loopback 0
+Router(config-if)#
+Router(config-if)#ip add 20.20.160.1 255.255.240.0
+Router(config-if)#
+Router(config-if)#exit
+Router(config)#ip nat inside source static 12.12.160.4 20.20.160.4
+Router(config)#
+Router(config)#int s0/0
+Router(config-if)#ip nat inside
+Router(config-if)#int f7/0
+Router(config-if)#ip nat outside
+Router(config-if)#no shut
+Router(config-if)#exit
+Router(config)#ip nat inside source static 12.12.160.3 20.20.160.3
+
+Router(config)#int loopback 1
+Router(config-if)#ip add 20.20.0.1 255.255.128.0
+Router(config-if)#exit
+Router(config)#
+Router(config)#ip nat inside source static 12.12.0.3 20.20.0.3
+Router(config)#ip nat inside source static 12.12.0.5 20.20.0.5
+Router(config)#int s1/0
+Router(config-if)#ip nat inside
+Router(config-if)#no shut
+
+Router(config)#int loopback 2
+Router(config-if)#ip add 20.20.128.1 255.255.224.0
+Router(config-if)#exit
+Router(config)#
+Router(config)#ip nat inside source static 12.12.128.3 20.20.128.3
+Router(config)#ip nat inside source static 12.12.128.4 20.20.128.4
+Router(config)#int s2/0
+Router(config-if)#ip nat inside
+Router(config-if)#no shut
+
+Router#conf t
+Router(config)#int loopback 3
+Router(config-if)#ip add 20.20.184.1 255.255.254.0
+Router(config-if)#exit
+Router(config)#ip nat inside source static 12.12.184.3 20.20.184.3
+Router(config)#ip nat inside source static 12.12.184.4 20.20.184.4
+Router(config)#int s3/0
+Router(config-if)#ip nat inside
+Router(config-if)#no shut
+Router(config-if)#exit
+
+
+
+
+
+
+
+
+
+
